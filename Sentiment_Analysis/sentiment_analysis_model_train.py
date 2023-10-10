@@ -38,8 +38,8 @@ model.fit(x_train_tfidf, y_train)
 predicted = model.predict(x_test_tfidf)
 score = accuracy_score(y_test, predicted)
 
-dump(model, 'model.joblib')
-dump(vocabulary, 'voca.joblib')
-dump(my_pipeline,'pipeline.joblib')
+dump(model, 'saves/model.joblib')
+dump(vocabulary, 'saves/voca.joblib')
+dump(my_pipeline,'saves/pipeline.joblib')
 
 print("Score:- ", score * 100, "%")

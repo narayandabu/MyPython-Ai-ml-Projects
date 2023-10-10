@@ -1,7 +1,8 @@
 from joblib import load
 
-vocabulary = load('voca.joblib')
-my_pipeline = load('pipeline.joblib')
+vocabulary = load('saves/voca.joblib')
+my_pipeline = load('saves/pipeline.joblib')
+model = load('saves/model.joblib')
 
 
 def sol_transform(solns):
@@ -14,7 +15,6 @@ def sol_transform(solns):
     return sol
 
 
-model = load('model.joblib')
 input_data = ['hellow', 'bad', 'struggle', 'lose']  # could be anything or any form
 
 refined_data = my_pipeline.transform(input_data)
