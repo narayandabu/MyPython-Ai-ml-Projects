@@ -3,8 +3,8 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-path1 = 'C:/Users/naray/OneDrive/Desktop/AiML/hand_sign_detect/single_hand_model.p'
-path2 = 'C:/Users/naray/OneDrive/Desktop/AiML/hand_sign_detect/multiple_hand_model.p'
+path1 = 'C:/Users/naray/OneDrive/Desktop/Devlopment/AiML/hand_sign_detect/single_hand_model.p'
+path2 = 'C:/Users/naray/OneDrive/Desktop/Devlopment/AiML/hand_sign_detect/multiple_hand_model.p'
 model1_dict = pickle.load(open(path1, 'rb'))
 model2_dict = pickle.load(open(path2, 'rb'))
 

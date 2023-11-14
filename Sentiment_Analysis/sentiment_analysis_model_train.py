@@ -15,7 +15,6 @@ my_pipeline = Pipeline(steps=[
     ('tfidf', TfidfTransformer()),
 ])
 
-
 labels = {
     'positive': 1.0,
     'negative': 0.0,
@@ -32,6 +31,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.20, random
 x_train_tfidf = my_pipeline.fit_transform(x_train)
 x_test_tfidf = my_pipeline.transform(x_test)
 vocabulary = my_pipeline.get_feature_names_out()
+print(x_test_tfidf, ' ', y_test)
 
 model = MultinomialNB()
 model.fit(x_train_tfidf, y_train)
@@ -40,6 +40,6 @@ score = accuracy_score(y_test, predicted)
 
 dump(model, 'saves/model.joblib')
 dump(vocabulary, 'saves/voca.joblib')
-dump(my_pipeline,'saves/pipeline.joblib')
+dump(my_pipeline, 'saves/pipeline.joblib')
 
 print("Score:- ", score * 100, "%")
