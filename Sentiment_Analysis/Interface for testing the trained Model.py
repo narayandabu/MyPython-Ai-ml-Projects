@@ -15,7 +15,7 @@ def sol_transform(solns):
     return sol
 
 
-input_data = ['hellow', 'bitch', 'struggle', 'fuck', 'accident']  # could be anything or any form
+input_data = ['hellow', 'dead', 'struggle', 'Bad Person', 'accident']  # could be anything or any form
 
 refined_data = my_pipeline.transform(input_data)
 predictions = model.predict(refined_data)
