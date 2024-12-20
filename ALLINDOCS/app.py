@@ -7,7 +7,7 @@ from AI_engine import model
 import numpy as np
 from tkinter import font
 
-# Chnage The Paths as Per Your Convience
+# Change The Paths as Per Your Convience
 TITLE = 'PDF Viewer'
 GEOMETRY = '900x900+440+180'
 ICON_IMAGE_PATH = 'ALLINDOCS/Assets/icon.png'
