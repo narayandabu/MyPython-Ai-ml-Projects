@@ -1,0 +1,141 @@
+.side-bar{
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    top:0;
+    height: 4rem;
+    min-width: 0rem;
+    max-width: 100%;
+    border-radius: 2rem;
+}
+.navb{
+    position: sticky;
+    display: flex;
+    top:0px;
+    left:0px;
+    right:0px;
+    height: auto;
+    flex-direction: column;
+    background-color:rgb(22, 22, 22);
+    width: 100%; 
+    align-items: center;  
+    text-align: center;
+    height: 5rem;
+    color:azure;
+    font-size: 3rem;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.menu_button{
+    top:0;
+    background-color: rgb(22, 22, 22);
+    color: aliceblue;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 2rem;
+    align-self: top;
+    font-size:2rem;
+    border: none;
+}
+.side-menu{
+    position:sticky;
+    display:flex;
+    flex-direction: column;
+    top:5rem;
+    right: 11rem;
+
+}
+
+.side-menu-bar{
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    left:-1.5rem;
+    width: 16rem;
+    height: 28rem;
+    color: black;
+    padding: 20px;
+    transition: left 0.5s ease-in-out;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.side-menu-baropen{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: -20rem;
+    width: 16rem;
+    height: 28rem;
+    color: black;
+    padding: 20px;
+    transition: left 0.5s ease-in-out;
+    border-radius: 1rem;
+    border: 3rem wheat;
+    gap: 1rem;
+}
+.side-bar-title{
+    color: white;
+    margin-left: 2.3rem;
+}
+.side-menu-list{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    gap: 2.1rem;
+}
+.side-menu-list button{
+    background-color: rgb(22, 22,22);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.5rem;
+    color: azure;
+    height: 2rem;
+    width: 8.5rem;
+    border-radius: 2rem;
+    border: none;
+    font-size: 1.2rem;
+}
+.side-menu-bar-eleopen{
+    display: flex;
+    flex-direction: row;
+}
+.side-menu-bar-eleopen.Link-Requestopen{
+    color: azure;
+}
+.side-menu-list button:hover{
+    background-color: gray;
+}
+.side-menu-list button.selected{
+    background-color:cornflowerblue;
+    color: azure;
+}
+.side-menu-baropen.side-menu-list{
+    background-color: rgb(179, 178, 178);
+    
+}
+.side-menu-baropen.side-menu-button{
+    color:gray;
+}
+.side-bar-title{
+    color: white;
+    /* background-color: red; */
+    border-radius: 1rem;
+    width: 10rem;
+    text-align: center;
+    /* animation-name: change_background;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out; */
+    /* border-color: white; */
+
+}
+/* @keyframes change_background{
+    0%{background-color: red;}
+    15%{background-color:aqua;}
+    30%{background-color:blue;}
+    45%{background-color:yellow;}
+    60%{background-color:orange;}
+    75%{background-color:purple;}
+    90%{background-color:gray;}
+    100%{background-color: red;}
+} */
