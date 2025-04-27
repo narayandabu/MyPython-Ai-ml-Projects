@@ -1,0 +1,95 @@
+.analyze-page {
+  position: relative;
+  display: flex;
+  flex-direction: row;  /* <-- important: ROW, not COLUMN */
+  background-color: #15171f;
+  min-height: 100vh;
+  padding-top: 5rem; /* small top margin */
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
+}
+.analyze-main-content{
+  flex:1;
+  display: flex;
+  flex-direction: row;
+}
+.analyze-sidebar {
+  position: absolute;
+  display: flex;
+  /* left: 1rem; */
+  flex-direction: column;
+  background-color: #2e3440;
+  width: 250px;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%);
+}
+.analyze-sidebar.hidden {
+  transform: translateX(23%);
+}
+
+.toggle-sidebar-btn {
+  position: relative;
+  height: 3rem;
+  width: 3rem;
+  background: #5e81ac;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 20px;
+  margin: 8px;
+  z-index: 10;
+}
+.analyze-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Header with animation --- */
+.analyze-header {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.analyze-header h2 {
+  color: #00dfdf;
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+}
+
+.analyze-header p {
+  color: #7dc1ef;
+  font-size: 1.4rem;
+}
+
+/* --- Analyze Loading Indicator --- */
+.analyze-loading {
+  color: #81a1c1;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  animation: blink 1s infinite alternate;
+}
+
+/* --- Animations --- */
+@keyframes fadeInDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}

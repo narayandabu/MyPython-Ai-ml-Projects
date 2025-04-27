@@ -1,13 +1,14 @@
 import React,{useState} from "react";
-import "./side_bar.css";
-import axios from "axios";
+import "./styles/side_bar.css";
+import axiosInstance from './utils/axiosInstance';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+
+
 
 function to_server(button){
-    axios.post('http://localhost:5000/api/type',{ button_type: button })
+    axiosInstance.post('http://localhost:5000/api/type',{ button_type: button })
     .then((response) => {
-        // const botItem = typewritter_effect(response.data.reply);
-        // console.log(response.data.reply);
-        // chat_area.appendChild(botItem);
         return response;
     })
     .catch(error => {
@@ -15,67 +16,131 @@ function to_server(button){
         return "";
 });
 }
-const reset_chats = ()=>{
-    const chats = document.getElementById('chat-area');
-    if(chats){
-        // console.log('Chats Cleared...');
-        while(chats.firstChild){
-            chats.removeChild(chats.firstChild);
+const Side_bar = ({setCurrentTool})=>{
+    const [isOpen, setIsOpen] = useState(false);
+    const [selected, setSelected] = useState(0); 
+    const [showDropdown, setShowDropdown] = useState(false);
+
+
+    const navigate = useNavigate();
+    const sidebarRef = useRef(null);
+
+    const handleLogout = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error("No token found, user might not be logged in.");
+          navigate('/');
+          return;
         }
-        return true;
-    }
-    else return false;
-}
-const Side_bar = ()=>{
-    const [isOpen, setIsOpen] = useState(true);
-    const [selected, setSelected] = useState(0); // Track selected button
-
-    const button_names = ["Sentiment", "Gemini", "PDF_Analyzer", "Link_Analyzer"];
-
-    const button_funcs = [
-        /*1.Sentiment*/()=>{
-            to_server('Sentiment');
-        },
-        /*2.Gemini*/()=>{
-            to_server('Gemini');
-        },
-        /*3.PDF_Analyzer*/()=>{
-            to_server('PDF_Analyzer');
-        },
-        /*4.Link_Analyzer*/()=>{
-            
-            to_server('Link_Analyzer');
-        },
-    ]
-    return(
-        <>
-            <div className="side-bar">
-                <button  onClick={() => setIsOpen(!isOpen)} className="menu_button"> {isOpen ? "☰": "✖"}</button>
-                <div className="navb">AllInDOCS</div> 
-            </div>
-            <div className="side-menu">
-                <div className={`side-menu-bar-ele${isOpen ? "open" : ""}`}>
-                    <div className={`side-menu-bar${isOpen ? "open" : ""}`}>
-                        <h2 className="side-bar-title">Choose Mode</h2>
-                        <ul className="side-menu-list">
-                            {button_names.map((label, index) => (
-                            <button 
-                                key={index} 
-                                className={selected === index ? "selected" : ""} 
-                                onClick={() => {setSelected(index),button_funcs[index](),reset_chats()}}
-                            >
-                                {label}
-                            </button>
-                            ))}
-                        </ul>
-                        <div className={`Link-Request${selected == 3? "open" : ""}`}>
-                            <h3>Hi,Hellow</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    
+        const response = await axiosInstance.post('http://localhost:5000/api/logout', {}, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+    
+        localStorage.removeItem('token');
+        navigate('/');
+      } catch (err) {
+        const message = err?.response?.data?.message || 'Unknown error';
+        if (message === "Invalid or expired token") {
+          localStorage.removeItem('token');
+          navigate('/');
+        }
+        console.error("Logout failed:", message);
+      }
+    };
         
-        </>
+    const button_names = ["Sentiment", "Gemini", "Analyzer",'Papers'];
+    const button_funcs = [
+        ()=>{to_server('Sentiment');},
+        ()=>{to_server('Gemini');},
+        ()=>{to_server('Analyzer');},
+        ()=>{to_server('Papers');},
+    ]
+    const handleViewProfile = () => {
+      console.log("Viewing profile...");
+    };
+    const handleButtonClick = (index, func) => {
+      setSelected(index);
+      func();
+      setCurrentTool(button_names[index]);
+    };
+    const toggleSidebar = () => setIsOpen(!isOpen);
+    const closeSidebar = () => setIsOpen(false);
+    const toggleDropdown = () => setShowDropdown((prev) => !prev);
+
+    useEffect(() => {
+      const handleClickOutside = (e) => {
+        const clickedOutsideSidebar =
+          sidebarRef.current && !sidebarRef.current.contains(e.target) && !e.target.closest(".menu_button") ;
+        const clickedOutsideAccount =
+          !e.target.closest('.account-section');
+    
+        if (clickedOutsideSidebar && isOpen) {
+          closeSidebar();
+        }
+        if (clickedOutsideAccount) {
+          setShowDropdown(false);
+        }
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isOpen]);
+    return(
+        
+<>
+<header className="nav-container">
+        <div className="nav-left">
+          <button onClick={toggleSidebar} className="menu_button">
+            {isOpen ? "✖" : "☰"}
+          </button>
+          <div className="logo-container">
+            <img src="../Logo-small.png" alt="logo" className="logo" />
+            <h1 className="navb">NeuroLinguo</h1>
+          </div>
+        </div>
+        <div className="account-section">
+        <button className="account-button" onClick={toggleDropdown}>
+          <img src="../default-avatar.png" className="account-avatar" />
+          
+          <i className="fas fa-chevron-down"></i>
+        </button>
+
+          {showDropdown  && (
+            <div className="account-dropdown">
+              <div className="account-user-info"></div>
+              <button title="profile" onClick={handleViewProfile}>View Profile</button>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </div>
+      </header>
+  {isOpen && (<div className="sidebar-overlay" onClick={closeSidebar} />)}
+  {/* Notebook Button */}
+  {/* Sidebar Menu */}
+  <aside ref={sidebarRef} className={`side-menu-bar ${isOpen ? "open" : ""}`}>
+    <h2 className="side-bar-title">Choose Mode</h2>
+    <ul className="side-menu-list">
+      {button_names.map((label, index) => (
+        <button 
+          key={index}
+          className={selected === index ? "selected" : ""}
+          onClick={() => {
+            handleButtonClick(index, button_funcs[index]); setSelected(index);}}
+          >
+          {label}
+        </button>
+      ))}
+    </ul>
+
+    {selected === 3 && (
+      <div className="Link-Request open"></div>
+    )}
+  </aside>
+</>
+
     )
 
 

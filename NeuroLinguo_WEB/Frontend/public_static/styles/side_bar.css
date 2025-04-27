@@ -1,0 +1,328 @@
+/* Sidebar Container */
+.side-menu-bar {
+  position: fixed;
+  top: 5rem;
+  left: 0;
+  width: 18rem;
+  height: 100vh; /* Full height */
+  background: linear-gradient(to bottom, #1f1f1f, #141414);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6); /* Soft shadow */
+  transform: translateX(-120%);
+  transition: transform 0.5s ease-out; /* Smooth slide-in transition */
+  z-index: 1001;
+  overflow-y: auto; /* Allow scrolling */
+}
+
+/* Sidebar Open State */
+.side-menu-bar.open {
+  transform: translateX(0);
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+  backdrop-filter: blur(4px); /* Add a bit of blur for depth */
+  z-index: 1000;
+  transition: opacity 0.3s ease; /* Smooth fade-in */
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Show overlay when sidebar is open */
+.sidebar-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.logo{
+  width: 5rem; /* Adjust the size of the logo */
+  height: 5rem;
+  /* object-fit: contain; */
+  border-radius: 50%;
+}
+/* Nav-Left for menu button and logo */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Adjust spacing between items */
+}
+
+/* Menu Button */
+.menu_button {
+  background-color: rgb(22, 22, 22);
+  color: white;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.menu_button:hover {
+  background-color: rgba(100, 100, 100, 0.8);
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.menu_button:active {
+  background-color: rgba(100, 100, 100, 0.6);
+  transform: scale(1);
+}
+
+.menu_button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: auto;
+}
+
+.logo {
+  width: 2.9rem; /* Adjust the size of the logo */
+  height: auto;
+  object-fit: contain;
+}
+
+.navb {
+  font-size: 2rem;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Sidebar Title */
+.side-bar-title {
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Menu List */
+.side-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Individual Button Styling */
+.side-menu-list button {
+  background-color: rgb(40, 40, 40);
+  color: azure;
+  height: 3.5rem; /* Taller buttons for better touch targets */
+  border-radius: 1.5rem;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align text and icon to the left */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.3s ease;
+  font-weight: 500;
+  width: 100%; /* Full width buttons */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  gap: 1rem; /* Space between icon and text */
+}
+
+/* Button Hover State */
+.side-menu-list button:hover {
+  background-color: #5d73b6;
+  transform: translateX(5px); /* Slight right shift on hover */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* More intense shadow */
+}
+
+/* Active Button State */
+.side-menu-list button.selected {
+  background-color: #7f9cf5; /* Soft indigo for active button */
+  color: white;
+  transform: translateX(5px); /* Slight shift to the right for selected item */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Slight glow effect for selected item */
+}
+
+/* Icon Styling */
+.side-menu-list button i {
+  font-size: 1.4rem; /* Slightly larger icon */
+  margin-right: 1rem; /* Space between icon and text */
+  color: #c7c7c7; /* Light color for icons */
+  transition: color 0.2s ease;
+}
+
+/* Icon Hover Effect */
+.side-menu-list button:hover i {
+  color: white; /* Change icon color on hover */
+}
+
+/* Button Text Styling */
+.side-menu-list button span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit; /* Inherit text color from button */
+  transition: color 0.2s ease;
+}
+
+/* Account Section Top Right */
+.account-section {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 900;
+}
+
+/* Account Button */
+.account-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.account-button i {
+  font-size: 1.5rem;
+}
+
+/* Dropdown for account options */
+.account-dropdown {
+  margin-top: 0.5rem;
+  background-color: #2c2c2c;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  min-width: 200px;
+}
+.account-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: rgb(56, 56, 56);
+}
+.account-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.account-user-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.account-user-info strong {
+  color: white;
+}
+
+.account-user-info small {
+  color: #cccccc;
+}
+
+.account-dropdown button {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  text-align: left;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.account-dropdown button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Animation for Slide-in Effect */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Menu Button */
+.menu_button {
+  background-color: rgb(22, 22, 22);
+  color: white;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.menu_button:hover {
+  background-color: rgba(100, 100, 100, 0.8);
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.menu_button:active {
+  background-color: rgba(100, 100, 100, 0.6);
+  transform: scale(1);
+}
+
+.menu_button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+.notebook-button {
+  margin-top: 1rem;
+  background-color: #4a4aff;
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  width:5rem;
+  align-self:flex-end;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.divider {
+  border-top: 1px solid #333;
+  margin: 1rem 0;
+}
